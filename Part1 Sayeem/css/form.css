@@ -1,0 +1,14 @@
+body{
+    background-color: aliceblue;
+}
+
+.form {
+    padding-bottom: 7px;
+    padding-top: 10px;
+  width: 50%;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
+  border-radius: 10px;
+}
