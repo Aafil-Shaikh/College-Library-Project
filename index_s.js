@@ -2,6 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express(); 
+const dotenv = require("dotenv")
+dotenv.config()
+
+const Student = require("./models/student");
 
 app.set('view engine', 'ejs');
 
@@ -13,20 +17,20 @@ const { Schema } = mongoose;
 mongoose.connect(process.env.MONGO_URL);
 
 const studentsSchema = new mongoose.Schema({
-    Student_Id:{
+    id:{
       type:Number,
       required:true,
     },
-    Student_Name:{
+    name:{
         type:String,
         required:true,
       },
-    Student_Email:{
+    email:{
         type: String,
         required: true,
         unique: true,
       },
-    Student_Phone_number: {
+    phone: {
         type: Number,
         required: true,
       },
@@ -80,10 +84,10 @@ app.post("/studentAdd",function(req,res){
          if(!found){
             //Creates new student
             const s = new Student({
-                Student_Id:siD,
-                Student_Name:sname,
-                Student_Email:semail,
-                Student_Phone_number:sphone
+                id:siD,
+                name:sname,
+                email:semail,
+                phone:sphone
             });
             s.save();
             messages="New Student with ID:"+siD+" was added to the DataBase!";
@@ -109,13 +113,13 @@ app.post("/studentUpdate",function(req,res){
          if(found){
         //Updates the student details
             if((semail=="" || sphone=="") || (semail=="" && sphone=="")){
-              let findEmail= found.Student_Email; 
-              let findPhone= found.Student_Phone_number; 
-              await Student.updateOne({Student_Id:siD},{$set:{Student_Name:sname,Student_Email:findEmail,Student_Phone_number:findPhone}});
+              let findEmail= found.email; 
+              let findPhone= found.phone; 
+              await Student.updateOne({Student_Id:siD},{$set:{name:sname,email:findEmail,phone:findPhone}});
               messages="Student with ID:"+siD+" was Updated successfully!";
               res.render('Update',{message:messages});
            }else{
-              await Student.updateOne({Student_Id:siD},{$set:{Student_Name:sname,Student_Email:semail,Student_Phone_number:sphone}});
+              await Student.updateOne({Student_Id:siD},{$set:{name:sname,email:semail,phone:sphone}});
               messages="Student with ID:"+siD+" was Updated successfully!";
               res.render('Update',{message:messages});
            }
