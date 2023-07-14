@@ -12,7 +12,6 @@ const { Schema } = mongoose;
 //Cloud connection
 mongoose.connect(process.env.MONGO_URL);
 
-
 const studentsSchema = new mongoose.Schema({
     Student_Id:{
       type:Number,
@@ -153,3 +152,4 @@ app.post("/studentDelete",function(req,res){
 app.listen(3000, function() {
     console.log("Server started on port 3000");
   });
+  
