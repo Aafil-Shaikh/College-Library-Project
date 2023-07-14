@@ -1,0 +1,9 @@
+<%= layout('layouts/boilerplate') %>
+
+<div class="container">
+  <ul>
+    <% students.forEach(student => { %>
+    <li><a href="/students/<%= student._id %>"><%= student.name %></a></li>
+    <% }) %>
+  </ul>
+</div>

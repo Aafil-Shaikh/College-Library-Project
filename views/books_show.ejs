@@ -1,0 +1,9 @@
+<%= layout('layouts/boilerplate') %>
+
+<div class="container">
+  <ul>
+    <% books.forEach(book => { %>
+    <li><a href="/books/<%= book._id %>"><%= book.title %></a></li>
+    <% }) %>
+  </ul>
+</div>

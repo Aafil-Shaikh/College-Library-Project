@@ -1,0 +1,11 @@
+<%= layout('layouts/boilerplate') %>
+
+<div class="container">
+  <h1><%= book.title %></h1>
+  <h2><%= book.author %></h2>
+  <p><%= book.desc %></p>
+
+  <% if (book.borrowedBy) { %>
+  <p>book borrowed by: <b><%= book.borrowedBy.name %></b></p>
+  <% } %>
+</div>

@@ -1,0 +1,40 @@
+<%= layout('layouts/boilerplate') %>
+<div class="container">
+
+  <% if (messages && messages.length > 0) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= messages %>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+  <% } %>
+  <h1 class="display-1"><%= student.name %></h1>
+  <div class="borrow">
+    <form action="/students/<%= student._id %>/books" method="GET">
+      <button type="submit" class="btn btn-success">Borrow a book</button>
+    </form>
+
+    <% if (student.booksBorrowed.length > 0) { %>
+      <h2 class="mt-5">Currently reading:</h2>
+      <% student.booksBorrowed.forEach(book => { %>
+      <div class="book card mb-3">
+        <div class="card-body">
+          <h3 class="card-title"><%= book.title %></h3>
+          <h6 class="card-subtitle mb-2"><%= book.author %></h6>
+
+          <form
+            action="/students/<%= student._id %>/books/<%= book._id %>/return"
+            method="POST"
+          >
+            <button type="submit" class="btn btn-danger">Return</button>
+          </form>
+        </div>
+      </div>
+      <% }); %>
+    <% } %>
+  </div>
+</div>

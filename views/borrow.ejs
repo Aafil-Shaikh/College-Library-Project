@@ -1,0 +1,20 @@
+<%= layout('layouts/boilerplate') %>
+
+<h1 class="display-1">Available Books</h1>
+
+<div class="books">
+  <% books.forEach(book => { %>
+  <div class="book card mb-3">
+    <div class="card-body">
+      <h3 class="card-title"><%= book.title %></h3>
+      <h4 class="card-subtitle mb-2 text-body-secondary"><%= book.author%></h4>
+      <form
+        action="/students/<%= student._id %>/books/<%= book._id %>/borrow"
+        method="POST"
+      >
+        <button type="submit" class="btn btn-info">Borrow</button>
+      </form>
+    </div>
+  </div>
+  <% }) %>
+</div>
