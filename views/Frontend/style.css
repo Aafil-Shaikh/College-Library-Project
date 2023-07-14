@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+html,
+body {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-size: 1em;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+}
+.top-container {
+  padding-bottom: 1px;
+  background-color: black;
+  z-index: 2;
+  top: 0;
+  position: sticky;
+}
+.nav {
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: space-between;
+  .nav-btn {
+    margin: 15px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border: 1px solid black;
+    border-radius: 40%;
+    transition: .2s;
+    > img{
+      width: inherit;
+      height: inherit;
+      object-fit: contain;
+    }
+    &:hover{
+      transform: scale(1.5, 1.5) translateY(-3px);
+    }
+  }
+}
+.header {
+  margin: 0 auto 10px;
+  max-width: 1200px;
+  position: relative;
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-container {
+  float: left;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  transition: .05s;
+  border: 2px solid transparent;
+  &:hover {
+    border: 2px solid #2196f3;
+    .search-icon {
+      transform: rotate(22.5deg) scale(1.5,1.5);
+    }
+  }
+}
+.search-form {
+  width: 100%;
+}
+.search-bar {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  padding: 0 20px;
+  font-size: 1.5em;
+  outline: none;
+  border: none;
+  color: #008abf;
+}
+.search-icon {
+  width: 75px;
+  border-radius: 10px;
+  height: 75px;
+  transition: 0.5s;
+}
+
+.insert-btn-container {
+  width: 20%;
+}
+.insert-btn {
+  height: 75px;
+  width: 100%;
+  font-size: 1.5rem;
+  border: 2px solid #8bc34a;
+  color: #8bc34a;
+  &:hover {
+    background-color: #8bc34a;
+    color: white;
+    transition: 0.3s ease;
+  }
+}
+
+.panel {
+  z-index: 1;
+  position: relative;
+  display: grid;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  margin: 20px auto;
+}
+.card {
+  height: auto;
+  width: 100%;
+  display: flex;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px -1px #2196f3;
+  overflow: hidden;
+  transition: 0.2s;
+}
+.card-content {
+  padding: 5px 30px;
+  flex-grow: 0;
+  margin-right: auto;
+}
+.title {
+  font-size: 2.25em;
+  margin-block: 0.5em;
+  color: #303336;
+  font-weight: 700;
+}
+.author {
+  margin-block: 0.8em;
+  font-size: 1em;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.desc {
+  color: #7b8591;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.card-buttons {
+  padding: 5px 30px;
+  display: grid;
+  align-items: center;
+  margin-right: 0;
+}
+button {
+  background: transparent;
+  font-weight: 700;
+  padding: 12px 30px;
+
+  border: 2px solid #2196f3;
+  color: #2196f3;
+  &:hover {
+    background-color: #2196f3;
+    color: white;
+    transition: 0.2s ease-in;
+  }
+
+  &:nth-child(even) {
+    border: 2px solid #e64a19;
+    color: #e64a19;
+    &:hover {
+      background-color: #e64a19;
+      color: white;
+      transition: 0.5s ease;
+    }
+  }
+}
+.editInput{
+  border: none;
+  border-bottom: 3px solid #aaa;
+  background: transparent;
+  outline: none;
+  transition: 0.5s;
+  &:focus {
+    border-color: #1480e0;
+    color: #083D77;
+  }
+}
+
+.coverTemp {
+  width: 150px;
+  box-shadow: rgba(50, 50, 93, 1) 0px 30px 50px -10px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  
+}
+.card-image {
+  align-self: center;
+  padding: 25px 15px 25px 30px;
+  flex-grow: 0;
+}
+#popupbg {
+  z-index: 20;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(94, 110, 141, 0.6);
+  display: none;
+  
+  .popup {
+    position: relative;
+    display: table;
+    padding: 1em;
+    margin: 120px auto;
+    background: #FFF;
+    border-radius: .25em;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    > button {
+      margin: 0 5%;
+      width: 40%;
+      transition: 0s;
+    }
+  }
+}
