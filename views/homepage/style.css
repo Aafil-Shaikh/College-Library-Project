@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+html {
+  background: black;
+  font-family: 'Times New Roman', Times, serif;
+}
+.container {
+  display: flex;
+  margin: auto;
+  padding: 0 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+.info {
+  margin-top: -100px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 40px;
+  width: 50%;
+  position: relative;
+  background: linear-gradient(
+    to right,
+    white,
+    #6b635c
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  > p {
+    width: 90%;
+    letter-spacing: 4px;
+    margin-top: -40px;
+    font-size: 15px;
+  }
+}
+
+.cards-list {
+  background-color: #2e1a12;
+  border: #2e1a12 solid 20px;
+  border-image: url(./resources/varnished-wood.jpg) 200 round;
+  box-shadow: 
+  inset 5px 5px 20px rgba(0,0,0,1), 
+  inset -5px 0px 20px rgba(0,0,0,1), 
+  10px 40px 70px rgba(0,0,0,.5);
+  padding: 0px 38px;
+  margin: 80px auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  min-width: 500px;
+  max-width: 500px;
+}
+
+.card {
+  background-image: linear-gradient(90deg, black -180%, transparent 30% , black 160%), url(./resources/bookspine.png);
+  background-size:cover;
+  margin: 12px auto;
+  width: 150px;
+  height: 500px;
+  border-radius: 16px 16px 8px 8px;
+  box-shadow: 3px 3px 50px 5px rgba(0,0,0,0.15), -3px -3px 50px 5px rgba(0,0,0,0.15);
+  transition: 0.4s;
+  transform: rotate(10deg);
+}
+.image {
+  margin: -30px auto 0px;
+  width: inherit;
+  height: inherit;
+  border-radius: 40px;
+  object-fit:scale-down;
+  transition: 0.4s;
+  transform: scale(0.5, 0.5);
+}
+
+.title {
+  text-align: center;
+  border-radius: 0px 0px 40px 40px;
+  font-weight: bold;
+  font-size: 0.7rem;
+  margin-top: -70px;
+  height: auto;
+  transition: 0.4s;
+  .desc{
+    font-weight: 300;
+    font-size: .9rem;
+    font-style: italic;
+    display: none;
+    color: #FFDF00;
+  }
+  .link{
+    font-weight: 300;
+    color: #FFDF00;
+    text-decoration: none;
+  }
+}
+
+.card:hover {
+  z-index: 1;
+  transform:  translateY(-50px) scale(1.2, 1.2);
+  box-shadow: 10px 10px 100px 10px rgba(0,0,0,0.25), -10px -10px 100px 10px rgba(0,0,0,0.22);
+
+  background-image: linear-gradient(90deg, black -180%, transparent 30% , black 160%), url(./resources/bookspine.png);
+
+  .title{
+    transform: translateY(-40px);
+    .desc{
+      margin-top: 25px;
+      display: block;
+    }
+    .link {
+      font-weight: 700;
+      font-size: smaller;
+      background-color: #FFDF00;
+      border-radius: 10px;
+      padding: 10px;
+      color: #7B3F00;
+      box-shadow: 5px 5px 20px 5px rgba(0,0,0,0.25);
+      cursor: pointer;
+      font-style: normal;
+    }
+  }
+}
+
+.cards-list:hover {
+  > div {
+    filter: blur(1px);
+  }
+  .card:hover {
+    filter: blur(0);
+  }
+}
+
+@media (width < 1490px) {
+  .container{
+    justify-content: center;
+    display:block;
+    .info{
+      text-align: center;
+      width: 100%;
+      margin: auto;
+      align-self: center;
+      font-size: 2em;
+      > p {
+        width:100%;
+      }
+    }
+    .cards-list{
+      min-width: 500px;
+      max-width: 500px;
+      margin: auto;
+      width: auto;
+    }
+  }
+}
+
