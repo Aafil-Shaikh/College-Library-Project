@@ -12,6 +12,7 @@
       ></button>
     </div>
   <% } %>
+
   <h1 class="display-1"><%= student.name %></h1>
   <div class="borrow">
     <form action="/students/<%= student._id %>/books" method="GET">
@@ -35,6 +36,8 @@
         </div>
       </div>
       <% }); %>
+    <% } else { %>
+      <p>The books are missing their favorite reader! <b>borrow one now!</b></p>
     <% } %>
   </div>
 </div>

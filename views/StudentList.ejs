@@ -11,17 +11,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">Home</a>
-            <a class="nav-item nav-link active" href="StudentList.ejs">Student Details</a>
-            <a class="nav-item nav-link" href="Add.ejs">Add</a>
-            <a class="nav-item nav-link" href="Update.ejs">Update</a>
-            <a class="nav-item nav-link " href="Deleete.ejs">Delete</a>
-          </div>
-        </div>
-      </nav>
+    <%- include('./partials/navbar') %>
 <br>
 <div id="searchBox"> 
     <form class="search-container" >
