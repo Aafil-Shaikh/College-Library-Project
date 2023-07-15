@@ -38,7 +38,7 @@ html {
 .cards-list {
   background-color: #2e1a12;
   border: #2e1a12 solid 20px;
-  border-image: url(./resources/varnished-wood.jpg) 200 round;
+  border-image: url(/resources/varnished-wood.jpg) 200 round;
   box-shadow: 
   inset 5px 5px 20px rgba(0,0,0,1), 
   inset -5px 0px 20px rgba(0,0,0,1), 
@@ -53,7 +53,7 @@ html {
 }
 
 .card {
-  background-image: linear-gradient(90deg, black -180%, transparent 30% , black 160%), url(./resources/bookspine.png);
+  background-image: linear-gradient(90deg, black -180%, transparent 30% , black 160%), url(/resources/bookspine.png);
   background-size:cover;
   margin: 12px auto;
   width: 150px;
@@ -100,7 +100,7 @@ html {
   transform:  translateY(-50px) scale(1.2, 1.2);
   box-shadow: 10px 10px 100px 10px rgba(0,0,0,0.25), -10px -10px 100px 10px rgba(0,0,0,0.22);
 
-  background-image: linear-gradient(90deg, black -180%, transparent 30% , black 160%), url(./resources/bookspine.png);
+  background-image: linear-gradient(90deg, black -180%, transparent 30% , black 160%), url(/resources/bookspine.png);
 
   .title{
     transform: translateY(-40px);

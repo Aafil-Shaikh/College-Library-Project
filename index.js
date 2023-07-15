@@ -13,6 +13,10 @@ const flash = require("connect-flash");
 const Student = require("./models/student");
 const Book = require("./models/book");
 
+const BooksCtrl = require("./models/api/books.controller")
+
+// const booksRoute = require('./models/api/books.route.js');
+
 const app = express();
 const port = process.env.PORT || 3000;
 const MongoClient = mongodb.MongoClient;
@@ -33,6 +37,8 @@ app.use(
   })
 );
 app.use(flash());
+
+// app.use('/books', booksRoute);
 
 // MongoClient.connect(process.env.uri, {
 //   maxPoolSize: 50,
@@ -72,6 +78,77 @@ app.get("/", (req, res) => {
 app.get('/managebooks', (req, res) => {
   res.render('manage_books')
 })
+
+// Get all books
+app.get("/books", async (req, res) => {
+  try {
+    const books = await Book.find();
+    // res.json(books);
+    res.render('manage_books')
+    // res.render('manage_books', { books })
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get a single book by ID
+// app.get("/:id", async (req, res) => {
+//   try {
+//     const book = await Book.findById(req.params.id);
+//     if (!book) {
+//       res.status(404).json({ error: "Book not found" });
+//       return;
+//     }
+//     res.json(book);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
+
+// // Create a new book
+// app.post("/", async (req, res) => {
+//   try {
+//     const { title, author, desc } = req.body;
+//     const book = new Book({ title, author, desc });
+//     const savedBook = await book.save();
+//     res.json(savedBook);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
+
+// // Update a book
+// app.put("/:id", async (req, res) => {
+//   try {
+//     const { title, author, desc } = req.body;
+//     const book = await Book.findByIdAndUpdate(
+//       req.params.id,
+//       { title, author, desc },
+//       { new: true }
+//     );
+//     if (!book) {
+//       res.status(404).json({ error: "Book not found" });
+//       return;
+//     }
+//     res.json(book);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
+
+// // Delete a book
+// app.delete("/:id", async (req, res) => {
+//   try {
+//     const book = await Book.findByIdAndDelete(req.params.id);
+//     if (!book) {
+//       res.status(404).json({ error: "Book not found" });
+//       return;
+//     }
+//     res.json({ message: "Book deleted successfully" });
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
 
 app.get("/students/:id", async (req, res) => {
   const { id } = req.params;
