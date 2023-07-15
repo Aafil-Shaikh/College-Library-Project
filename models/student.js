@@ -6,6 +6,10 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  id:{
+    type:Number,
+    required:true,
+  },
   email: {
     type: String,
     required: true,
@@ -22,6 +26,19 @@ const studentSchema = new mongoose.Schema({
     },
   ],
 });
+
+// studentSchema.pre('save', async function (next) {
+//   try {
+//     if (!this.id) {
+//       // Generate a new id if it's not already assigned
+//       const highestid = await this.constructor.findOne({}, 'id').sort('-id').exec();
+//       this.id = highestid ? highestid.id + 1 : 1;
+//     }
+//     next();
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 const Student = mongoose.model("Student", studentSchema);
 
