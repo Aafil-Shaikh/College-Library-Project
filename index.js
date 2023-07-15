@@ -25,6 +25,15 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: true,
+    resave: true,
+  })
+);
+app.use(flash());
+
 // MongoClient.connect(process.env.uri, {
 //   maxPoolSize: 50,
 //   wtimeoutMS: 2500,
@@ -63,6 +72,105 @@ app.get("/", (req, res) => {
 app.get('/managebooks', (req, res) => {
   res.render('manage_books')
 })
+
+app.get("/students/:id", async (req, res) => {
+  const { id } = req.params;
+  const student = await Student.findById(id).populate("booksBorrowed");
+  // res.send(student);
+  res.render("student", { student, messages: req.flash("success") });
+});
+
+app.get("/students/:id/books", async (req, res) => {
+  try {
+    const student = await Student.findById(req.params.id).populate(
+      "booksBorrowed"
+    );
+
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    const availableBooks = await Book.find({ borrowedBy: null });
+
+    res.render("borrow", { student, books: availableBooks });
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.post("/students/:studentId/books/:bookId/borrow", async (req, res) => {
+  try {
+    const { studentId, bookId } = req.params;
+    const student = await Student.findById(studentId);
+
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    const book = await Book.findById(bookId);
+
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
+    if (book.borrowedBy) {
+      return res.status(400).json({ error: "Book is already borrowed" });
+    }
+
+    student.booksBorrowed.push(book);
+    book.borrowedBy = student;
+
+    await student.save();
+    await book.save();
+
+    // res.status(200).json({ message: "Book borrowed successfully" });
+
+    req.flash("success", "Book borrowed successfully!");
+    res.redirect(`/students/${studentId}`);
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.post("/students/:studentId/books/:bookId/return", async (req, res) => {
+  try {
+    const { studentId, bookId } = req.params;
+    const student = await Student.findById(studentId);
+
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    const book = await Book.findById(bookId);
+
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
+    if (
+      !book.borrowedBy ||
+      book.borrowedBy.toString() !== student._id.toString()
+    ) {
+      return res
+        .status(400)
+        .json({ error: "Book is not borrowed by the student" });
+    }
+
+    student.booksBorrowed = student.booksBorrowed.filter(
+      (b) => b.toString() !== book._id.toString()
+    );
+    book.borrowedBy = null;
+
+    await student.save();
+    await book.save();
+
+    // res.status(200).json({ message: "Book returned successfully" });
+    req.flash("success", "Book returned successfully!");
+    res.redirect(`/students/${studentId}`);
+  } catch (err) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 app.get("/students",function(req,res){
 
