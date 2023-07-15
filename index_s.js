@@ -5,8 +5,6 @@ const app = express();
 const dotenv = require("dotenv")
 dotenv.config()
 
-const Student = require("./models/student");
-
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
