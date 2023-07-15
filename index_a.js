@@ -10,7 +10,7 @@ const MongoClient = mongodb.MongoClient
 // mongo_password="Aafil321"
 // uri=`mongodb+srv://${mongo_username}:${mongo_password}@cluster0.g7tgxqn.mongodb.net/`
 
-const port = process.env.port || 3000     
+const port = 3000     
 
 MongoClient.connect(
   process.env.uri,

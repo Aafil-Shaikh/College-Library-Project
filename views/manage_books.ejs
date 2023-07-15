@@ -38,9 +38,29 @@
   </div>
   
   
+  <!-- <section class="panel" id="panel"></section> -->
 
-  <section class="panel" id="panel"></section>
 
-  <script src="/js/script.js"></script>
+  <section class="panel" id="panel">
+    <% books.forEach(book => { %>
+      <div class="card" id="<%= book._id %>">
+        <div class="card-image">
+          <img src="/resources/coverTemp.jpg" class="coverTemp">
+        </div>
+        <div class="card-content">
+          <h3 class="title"><%= book.title %></h3>
+          <h6 class="author"><%= book.author %></h6>
+          <p class="desc"><%= book.desc %></p>
+        </div>
+        <div class="card-buttons">
+          <button id="edit-btn" >Edit</button>
+          <button id="delete-btn">Delete</button>
+        </div>
+      </div>
+    <% }); %>
+  </section>
+
+  <!-- <script src="/js/test.js"></script> -->
+  <script src="/js/script1.js"></script>
 </body>
 </html>

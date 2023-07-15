@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongodb = require("mongodb");
-// const BooksDAO = require("./models/dao/booksDAO.js");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -13,6 +12,7 @@ const flash = require("connect-flash");
 const Student = require("./models/student");
 const Book = require("./models/book");
 
+const BooksDAO = require("./models/dao/booksDAO.js")
 const BooksCtrl = require("./models/api/books.controller")
 
 // const booksRoute = require('./models/api/books.route.js');
@@ -75,21 +75,47 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get('/managebooks', (req, res) => {
-  res.render('manage_books')
-})
+// Book routes
+// const booksRouter = require("./models/api/books.route");
+// app.use("/books", booksRouter);
 
-// Get all books
+// // Get all books
 app.get("/books", async (req, res) => {
   try {
-    const books = await Book.find();
-    // res.json(books);
-    res.render('manage_books')
-    // res.render('manage_books', { books })
+    const books = await Book.find({});
+    // console.log(books)
+    res.render("manage_books", { books });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
+app.post('/api/v1/books', async (req, res) => {
+
+  try {
+    const bookData = req.body;
+    const newBook = new Book(bookData);
+    await newBook.save()
+    res.json({ message: 'Book stored successfully' });
+    // res.redirect('/books')
+    
+  } catch (error) {
+    res.status(500).json({ message: 'Error storing book in the database' });
+  }
+});
+
+app.delete('/api/v1/books/:id', async (req, res) => {
+
+  try {
+    // console.log(req.params.id)
+    await Book.findByIdAndDelete(req.params.id)
+    res.json({ message: 'Book deleted successfully' });
+    
+  } catch (err) {
+    console.error(err);
+      res.status(500).json({ message: 'Error deleting book from the database' });
+  }
+})
 
 // Get a single book by ID
 // app.get("/:id", async (req, res) => {
@@ -136,8 +162,8 @@ app.get("/books", async (req, res) => {
 //   }
 // });
 
-// // Delete a book
-// app.delete("/:id", async (req, res) => {
+// Delete a book
+// app.delete("/books/:id", async (req, res) => {
 //   try {
 //     const book = await Book.findByIdAndDelete(req.params.id);
 //     if (!book) {
@@ -149,6 +175,11 @@ app.get("/books", async (req, res) => {
 //     res.status(500).json({ error: err.message });
 //   }
 // });
+
+app.get("/borrow", async (req, res) => {
+  const students = await Student.find({});
+  res.render("students_show", { students });
+});
 
 app.get("/students/:id", async (req, res) => {
   const { id } = req.params;
