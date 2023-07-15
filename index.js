@@ -50,4 +50,8 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
+app.get('/managebooks', (req, res) => {
+  res.render('manage_books')
+})
+
 app.listen(port, console.log(`server live on port ${port}`));
